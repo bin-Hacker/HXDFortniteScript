@@ -1,101 +1,92 @@
-( ()=> {
-    let data = 
-    [
+# Script for Free Fortnite Skins,Pickaxes,Emotes
 
-        //Lollipop to Pitchfork and Tactical Black to Rake
-        
-        {
-            "original": "Weapons/FORT_Melee/PickAxe_Tactical_Black/Meshes/SK_PickAxe_Tactical_Black",
-            "current":  "Weapons/FORT_Melee/Meshes/Pitchfork_Basic",
-            "replace":  "Weapons/FORT_Melee/Meshes/SK_Rake"
-        },
-        {
-            "original": "Weapons/FORT_Melee/Pickaxe_Lollipop/Meshes/SK_Pickaxe_lollipop",
-            "replace" : "Weapons/FORT_Melee/Meshes/Pitchfork_Basic",
-        },
-        {
-            "original" : "UI/Foundation/Textures/Icons/Weapons/Items/T-Icon-Pickaxes-SK-Pickaxe-Lollipop",
-            "replace" : "UI/Foundation/Textures/Icons/Weapons/Items/T-Icon-Weapons-Pitchfork-Basic"
-        },
-        {
-            "original" : "UI/Foundation/Textures/Icons/Weapons/Items/T-Icon-Pickaxes-SK-PickAxe-Tactical-Black",
-            "replace" : "UI/Foundation/Textures/Icons/Weapons/Items/T-Icon-Weapons-SK-GardenRake"
-        },
-        {
-            "original" : "UI/Foundation/Textures/Icons/Weapons/Items/T-Icon-Pickaxes-SK-Pickaxe-Lollipop-L",
-            "replace" : "UI/Foundation/Textures/Icons/Weapons/Items/T-Icon-Weapons-Pitchfork-Basic-L"
-        },
-        {
-            "original" : "UI/Foundation/Textures/Icons/Weapons/Items/T-Icon-Pickaxes-SK-PickAxe-Tactical-Black-L",
-            "replace" : "UI/Foundation/Textures/Icons/Weapons/Items/T-Icon-Weapons-SK-GardenRake-L"
-        },
+This script can be used in Google Chrome SOURCE and can be extracted to Fortnite !.
+Using this script you can get banned but chances are small.
 
-        
-        //Twitch Stealth to Heist Skin
-        {
-            "original" : "Player/Male/Medium/Bodies/M_Med_UltraRareCommando_01/Meshes/M_MED_Commando_UltraRare_01_Body_Skeleton_AnimBP.M_MED_Commando_UltraRare_01_Body_Skeleton_AnimBP_C",
-            "replace" : "Player/Male/Medium/Bodies/M_MED_Assassin/Meshes/M_MED_Soldier_Assassin_01_Skeleton_AnimBlueprint.M_MED_Soldier_Assassin_01_Skeleton_AnimBlueprint_C",
-            "single" : true
-        },
-        {
-            "original" : "Player/Male/Medium/Bodies/M_Med_UltraRareCommando_01/Meshes/M_MED_Commando_UltraRare_01_Body_Skeleton_AnimBP",
-            "replace" : "Player/Male/Medium/Bodies/M_MED_Assassin/Meshes/M_MED_Soldier_Assassin_01_Skeleton_AnimBlueprint"
-        },
-        {
-            "original" : "Player/Male/Medium/Bodies/M_Med_UltraRareCommando_01/Meshes/M_MED_Commando_UltraRare_01_Body",
-            "replace" : "Player/Male/Medium/Bodies/M_MED_Assassin/Meshes/M_MED_Soldier_Assassin_01"
-        },
-        {
-            "original" : "Player/Male/Medium/Bodies/M_Med_UltraRareCommando_01/Skins/Camo_Stealth/Materials/MI_StealthRaptor_Body",
-            "replace" : "Player/Male/Medium/Bodies/M_MED_Assassin/Skins/Materials/MI_M_MED_Heist_Body"
-        },
-        {
-            "original" : "Player/Male/Medium/Bodies/M_Med_UltraRareCommando_01/Skins/Camo_Stealth/Materials/MI_StealthRaptor_Hat",
-            "replace" : "Accessories/Hats/M_MED_HeistMask_Diamond/Materials/MI_Heistmask_Diamond"
-        },
+## Getting Started
 
-    ];
-    String.prototype.hexEncode = function(){
-        var hex, i;
+1.Open a Chrome Tab, open DevTools from right click menu, go to "Sources", on your left you will find "Snippets", then press "New Snippet". 
 
-        var result = "";
-        for (i=0; i<this.length; i++) {
-            hex = this.charCodeAt(i).toString(16);
-            result +='\\x' +("0"+hex).slice(-2);
-        }
 
-        return result.replace(/\\x20/g,'\\x00')
-    }
-    let outputSingle = [];
-    let outputDouble = [];
-    data.forEach( (e, index) => {
-        if(e.replace.length > e.original.length) throw "The Replace must be shorter than ORIGINAL at index "+index;
-        if(!e.hasOwnProperty('current')) e.current = e.original;
-        if(!e.hasOwnProperty('single'))
-        {
-            let originalName = e.original+"."+e.original.split('/').pop();
-            let currentName = e.current+"."+e.current.split('/').pop();
-            let replaceName = e.replace+"."+e.replace.split('/').pop();
-            while(currentName.length < originalName.length) currentName+=' ';
-            while(replaceName.length < currentName.length) replaceName+=' ';
-            outputDouble.push(`/${currentName.hexEncode()}/ s//${replaceName.hexEncode()}/g`)
-        }
-        let originalName = e.original;
-        let currentName = e.current;
-        let replaceName = e.replace;
-        while(currentName.length < originalName.length) currentName+=' ';
-        while(replaceName.length < currentName.length) replaceName+=' ';
-        if(e.hasOwnProperty('single'))
-            outputDouble.push(`/${currentName.hexEncode()}/ s//${replaceName.hexEncode()}/g`)
-        else
-            outputSingle.push(`/${currentName.hexEncode()}/ s//${replaceName.hexEncode()}/g`)
+2. Paste Script
 
-    })
-    let command = "sed -b -i '"+ outputDouble.join(';')+"'";
-    command +=' "pakchunk0-WindowsClient.pak"';
-    command +='; ';
-    command += "sed -b -i '"+ outputSingle.join(';')+"'";
-    command +=' "pakchunk0-WindowsClient.pak"';
-    console.log(command);
+Info about the script data:
+"original": The original file you want to replace, a must have.
+"replace": The new file you want to replace with, a must have.
+"current": Current file name in your pack, if you previously changed an item and want to change to something different. First object from array is an example. Optional.
+"single": This will not duplicate the name file, is good when you want to replace skins. Example in the data I gave you. Optional.
+-
+The data from script currently changes Stealth Skin from Twitch Prime to new Heist Skin.
 
-})();
+3. Remove data from array and add what you want. Follow info above. Save it.
+
+4. Press Ctrl+Enter, the console will popup, copy the code.
+
+5. Open {ForniteFolder}\FortniteGame\Content\Paks, make a copy of "pakchunk0-WindowsClient.pak", name it differently, change the extension to .pak.bk, don't leave blank .pak, it will crash.
+
+6. Open MinGW Bash or Git Bash by right clicking if missing, go to where you installed MinGW, open the file (i have Git Bash, don't know exactly), type cd d: if you have it installed somewhere else then cd "{path of fortnite Packs}"
+
+7. Paste the command generated in DevTools.
+
+8. Wait from 5 to 10 minutes, depends on how many you changed, if 2-3 changed might be 2-3 minutes, 10 changes 6-7 minutes.
+
+9. Open the game.
+
+
+
+
+End with an example of getting some data out of the system or using it for a little demo
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Deployment
+
+Add additional notes about how to deploy this on a live system
+
+## Built With
+
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
+## Authors
+
+* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
